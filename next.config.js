@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'i.pximg.net',
+        hostname: 'konachan.com',
         port: '',
         pathname: '/**',
       },

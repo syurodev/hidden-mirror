@@ -1,7 +1,6 @@
 'use client'
 
 import images from '@/lib/images';
-import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import Draggable from 'react-draggable';
 
@@ -136,7 +135,7 @@ export default function Home() {
         </div>
       }
       <div className="w-[100vw] h-[100vh] bg-gray-50 dark:bg-black pt-2">
-        <div className='container mx-auto text-center pt-2 px-1'>
+        <div className='container mx-auto text-center pt-2 px-1 relative'>
 
           {
             index === 0 ?
@@ -162,15 +161,13 @@ export default function Home() {
                 </select>
               </div>
           }
-          <div>
-            <button
-              className='text-white bg-rose-600 hover:bg-rose-700 focus:ring-4 focus:ring-rose-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-rose-500 dark:hover:bg-rose-700 transition-colors focus:outline-none dark:focus:ring-rose-800'
-              onClick={handleOpenNewWindow}>{
-                index === 0 ? "Open image" :
-                  index === 1 ? "Open mirror" : "Close mirror"
-              }
-            </button>
-          </div>
+          <button
+            className=' text-white bg-rose-600 hover:bg-rose-700 focus:ring-4 focus:ring-rose-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-rose-500 dark:hover:bg-rose-700 transition-colors focus:outline-none dark:focus:ring-rose-800'
+            onClick={handleOpenNewWindow}>{
+              index === 0 ? "Open image" :
+                index === 1 ? "Open mirror" : "Close mirror"
+            }
+          </button>
         </div>
         {index !== 0
           &&
@@ -180,7 +177,12 @@ export default function Home() {
               updateNewPosition({ x: data.x, y: data.y });
             }}
           >
-            <img className='cursor-move max-w-[900px]' src={index === 2 ? image2Url : image1Url} draggable="false" alt='' />
+            <img
+              className='cursor-move max-w-[900px] h-full object-cover'
+              src={index === 2 ? image2Url : image1Url}
+              draggable="false"
+              alt=''
+            />
           </Draggable>
         }
       </div>
