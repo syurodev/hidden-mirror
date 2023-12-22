@@ -8,13 +8,19 @@ export default function Home() {
 
   const windowId = useMemo(() => Math.random(), [])
   const [loading, setLoading] = useState(true) // load images effect
-  const [position, setPosition] = useState({ x: window.innerWidth / 4, y: 0 }) // relative image's postion
+  const [position, setPosition] = useState<{ x: number, y: number }>({ x: 0, y: 0 }) // relative image's postion
   const [imageId, setImageId] = useState(0) // image id in set
   const image1Url = images[imageId].censor
   const image2Url = images[imageId].uncensor
   const [index, setIndex] = useState(0) // 0: original window, 1: base image window, 2: uncensor image window
 
   const bc = useMemo(() => new BroadcastChannel('biya'), []);
+
+  useEffect(() => {
+    if (window) {
+      setPosition({ x: window.innerWidth / 4, y: 0 })
+    }
+  }, [])
 
   const handleOpenNewWindow = () => {
     // manual open is also ok 
@@ -178,7 +184,7 @@ export default function Home() {
             }}
           >
             <img
-              className='cursor-move max-w-[900px] h-full object-cover'
+              className='cursor-move max-w-[900px] object-cover'
               src={index === 2 ? image2Url : image1Url}
               draggable="false"
               alt=''
